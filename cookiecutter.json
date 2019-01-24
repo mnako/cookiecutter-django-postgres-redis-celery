@@ -1,0 +1,7 @@
+{
+  "project_name": "examplesite",
+  "project_slug": "000_{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "staging_server_name": "staging.{{ cookiecutter.project_name.lower().replace(' ', '_') }}.com",
+  "production_server_name": "www.{{ cookiecutter.project_name.lower().replace(' ', '_') }}.com",
+  "docker_image_registry": "registry.gitlab.com/sunscrapers/{{ cookiecutter.project_slug }}"
+}
