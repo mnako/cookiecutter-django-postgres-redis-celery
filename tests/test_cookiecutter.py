@@ -26,7 +26,7 @@ def test_project(request):
         if os.path.isdir(test_project_dir):
             utils.rmtree(test_project_dir)
 
-    # request.addfinalizer(remove_generated_project)
+    request.addfinalizer(remove_generated_project)
 
     cookiecutter(
         ".",
