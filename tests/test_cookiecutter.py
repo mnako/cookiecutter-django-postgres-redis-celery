@@ -24,7 +24,10 @@ def test_project(request):
 
     def remove_generated_project():
         if os.path.isdir(test_project_dir):
-            utils.rmtree(test_project_dir)
+            try:
+                utils.rmtree(test_project_dir)
+            except PermissionError:
+                pass
 
     request.addfinalizer(remove_generated_project)
 
