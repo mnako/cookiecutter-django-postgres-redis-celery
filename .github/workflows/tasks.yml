@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Install Dependencies
+      - name: Install Poetry
+        run: pip3 install poetry
+      - name: Install Poetry Dependencies
         run: make install
       - name: Test
         run: make test
