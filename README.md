@@ -1,3 +1,5 @@
+![CI Status](https://github.com/mnako/cookiecutter-django-postgres-redis-celery/workflows/CI/badge.svg)
+
 # Django/PostgreSQL/Redis/Celery in Docker cookiecutter
 
 ##  Quickstart guide:
