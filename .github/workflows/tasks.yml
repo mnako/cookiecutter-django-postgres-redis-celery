@@ -1,0 +1,10 @@
+on:
+  push:
+jobs:
+  ci:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run:
+        - make install
+        - make test

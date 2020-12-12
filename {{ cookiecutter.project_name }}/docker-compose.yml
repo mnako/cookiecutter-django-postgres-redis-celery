@@ -82,7 +82,7 @@ services:
     volumes:
      - ./app:/app
     healthcheck:
-      test: celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@$$HOSTNAME || exit 1
+      test: celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@celery || exit 1
       interval: 1m
       timeout: 10s
       retries: 3

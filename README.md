@@ -1,6 +1,4 @@
-# Djops
-
-WIP repo for my 2019-01-23 talk on Django/Docker operations.
+# Django/PostgreSQL/Redis/Celery in Docker cookiecutter
 
 ##  Quickstart guide:
 
