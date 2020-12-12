@@ -1,10 +1,11 @@
 on:
   push:
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - run:
-        - make install
-        - make test
+      - name: Install Dependencies
+        run: make install
+      - name: Test
+        run: make test
