@@ -11,6 +11,8 @@ from cookiecutter.main import cookiecutter
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger("cookiecutter-django-postgres-redis-celery")
 
+test_project_dir = "/tmp/cookiecutter-django-postgres-redis-celery"
+
 
 @pytest.fixture(scope="session", autouse=True)
 def test_project(request):
@@ -20,33 +22,32 @@ def test_project(request):
     the project directory.
     """
 
-    rendered_dir = "testproject"
-
     def remove_generated_project():
-        if os.path.isdir(rendered_dir):
-            utils.rmtree(rendered_dir)
+        if os.path.isdir(test_project_dir):
+            utils.rmtree(test_project_dir)
 
-    request.addfinalizer(remove_generated_project)
+    # request.addfinalizer(remove_generated_project)
 
     cookiecutter(
         ".",
+        output_dir="/tmp",
         no_input=True,
         extra_context={
-            "project_name": "testproject",
+            "project_name": "cookiecutter-django-postgres-redis-celery",
             "production_server_name": "www.example.com",
         },
     )
 
 
 def test_project_renders_to_dir():
-    assert os.path.isdir("testproject")
+    assert os.path.isdir(test_project_dir)
 
 
 def test_project_make_build_succeeds():
     docker_build_process = subprocess.Popen(
         "make build PROJECT_VERSION=0.0.0",
         shell=True,
-        cwd="./testproject/",
+        cwd=test_project_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -66,7 +67,7 @@ def test_project_make_test_succeeds():
     docker_run_process = subprocess.Popen(
         "make test",
         shell=True,
-        cwd="./testproject/",
+        cwd=test_project_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -88,7 +89,7 @@ def test_project_make_up_reaches_healthy_state():
     docker_run_process = subprocess.Popen(
         "make up",
         shell=True,
-        cwd="./testproject/",
+        cwd=test_project_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -101,7 +102,7 @@ def test_project_make_up_reaches_healthy_state():
         docker_ps_process = subprocess.Popen(
             "docker ps",
             shell=True,
-            cwd="./testproject/",
+            cwd=test_project_dir,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -128,7 +129,7 @@ def test_project_make_up_reaches_healthy_state():
     docker_down_process = subprocess.Popen(
         "make down",
         shell=True,
-        cwd="./testproject/",
+        cwd=test_project_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
