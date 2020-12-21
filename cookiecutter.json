@@ -1,0 +1,6 @@
+{
+  "project_name": "examplesite",
+  "staging_server_name": "staging.{{ cookiecutter.project_name.lower().replace(' ', '_') }}.com",
+  "production_server_name": "www.{{ cookiecutter.project_name.lower().replace(' ', '_') }}.com",
+  "docker_image_registry": "ghcr.io/mnako/{{ cookiecutter.project_name }}"
+}
