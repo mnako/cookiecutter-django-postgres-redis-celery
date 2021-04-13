@@ -1,14 +1,31 @@
 version: 2
 updates:
+  # Cookiecutter GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+
+  # Cookiecutter Poetry Dependencies
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
+
+  # Project Poetry Dependencies
+  - package-ecosystem: "pip"
+    directory: "/{{ cookiecutter.project_name }}/app/requirements"
+    schedule:
+      interval: "daily"
+
+  # Project Dev Dockerfile
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "/{{ cookiecutter.project_name }}/app"
+    schedule:
+      interval: "daily"
+
+  # Project Dist Dockerfile
+  - package-ecosystem: "docker"
+    directory: "/{{ cookiecutter.project_name }}/docker/dist"
     schedule:
       interval: "daily"
