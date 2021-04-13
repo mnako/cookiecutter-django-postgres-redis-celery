@@ -4,4 +4,4 @@ psycopg2-binary==2.8.6
 redis==3.5.3
 kombu==5.0.2
 celery==5.0.5
-gunicorn==20.0.4
+gunicorn==20.1.0
