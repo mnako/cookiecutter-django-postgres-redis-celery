@@ -2,6 +2,6 @@ Django==3.2.3
 django-celery-beat==2.2.0
 psycopg2-binary==2.8.6
 redis==3.5.3
-kombu==5.0.2
+kombu==5.1.0
 celery==5.0.5
 gunicorn==20.1.0
