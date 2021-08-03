@@ -1,4 +1,4 @@
-Django==3.2.5
+Django==3.2.6
 django-celery-beat==2.2.1
 psycopg2-binary==2.9.1
 redis==3.5.3
