@@ -1,6 +1,6 @@
-FROM python:3.9.6
+FROM python:3.9.6-slim-buster
 
-RUN apt-get update && apt-get install -y ca-certificates netcat-openbsd postgresql-client-11
+RUN apt-get update && apt-get install -y curl ca-certificates netcat-openbsd procps postgresql-client-11
 
 WORKDIR /app
 
