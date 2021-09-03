@@ -26,6 +26,18 @@ updates:
 
   # Project Dist Dockerfile
   - package-ecosystem: "docker"
-    directory: "/{{ cookiecutter.project_name }}/docker/dist"
+    directory: "/{{ cookiecutter.project_name }}/docker/dist/app"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/{{ cookiecutter.project_name }}/docker/dist/celery"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/{{ cookiecutter.project_name }}/docker/dist/celerybeat"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/{{ cookiecutter.project_name }}/docker/dist/nginx"
     schedule:
       interval: "daily"
