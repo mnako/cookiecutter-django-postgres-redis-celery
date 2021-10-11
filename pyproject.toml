@@ -8,7 +8,7 @@ authors = ["Michal Nakoneczny"]
 python = "3.9.1"
 pytest = "^6.2.5"
 cookiecutter = "^1.7.3"
-pytest-timeout = "^1.4.2"
+pytest-timeout = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 
