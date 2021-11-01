@@ -5,7 +5,7 @@ description = "Django/PostgreSQL/Redis/Celery in Docker cookiecutter"
 authors = ["Michal Nakoneczny"]
 
 [tool.poetry.dependencies]
-python = "3.9.1"
+python = "3.10.0"
 pytest = "^6.2.5"
 cookiecutter = "^1.7.3"
 pytest-timeout = "^2.0.1"
