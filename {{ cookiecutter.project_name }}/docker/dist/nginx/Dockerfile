@@ -1,4 +1,4 @@
-FROM nginx:1.21.3-alpine
+FROM nginx:1.21.4-alpine
 WORKDIR /app
 RUN mkdir /app/statics
 
