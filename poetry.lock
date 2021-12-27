@@ -211,7 +211,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 
 [[package]]
 name = "pytest-timeout"
-version = "2.0.1"
+version = "2.0.2"
 description = "pytest plugin to abort hanging tests"
 category = "main"
 optional = false
@@ -302,8 +302,8 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.9.1"
-content-hash = "069466c0419247a589d598a13469b310563219e5d565376ad0a73d3f3231c37b"
+python-versions = "3.10.0"
+content-hash = "80c39f41eadf8d6f62e1e086a3a380e5f0124b067bf994ac5aba24c1d1e078f1"
 
 [metadata.files]
 arrow = [
@@ -437,8 +437,8 @@ pytest = [
     {file = "pytest-6.2.5.tar.gz", hash = "sha256:131b36680866a76e6781d13f101efb86cf674ebb9762eb70d3082b6f29889e89"},
 ]
 pytest-timeout = [
-    {file = "pytest-timeout-2.0.1.tar.gz", hash = "sha256:a5ec4eceddb8ea726911848593d668594107e797621e97f93a1d1dbc6fbb9080"},
-    {file = "pytest_timeout-2.0.1-py3-none-any.whl", hash = "sha256:329bdea323d3e5bea4737070dd85a0d1021dbecb2da5342dc25284fdb929dff0"},
+    {file = "pytest-timeout-2.0.2.tar.gz", hash = "sha256:e6f98b54dafde8d70e4088467ff621260b641eb64895c4195b6e5c8f45638112"},
+    {file = "pytest_timeout-2.0.2-py3-none-any.whl", hash = "sha256:fe9c3d5006c053bb9e062d60f641e6a76d6707aedb645350af9593e376fcc717"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.1.tar.gz", hash = "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"},
