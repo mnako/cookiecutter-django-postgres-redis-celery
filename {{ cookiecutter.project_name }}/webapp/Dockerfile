@@ -2,11 +2,16 @@ FROM python:3.10.1-slim-buster
 
 RUN apt-get update && apt-get install -y curl ca-certificates netcat-openbsd procps postgresql-client-11
 
-WORKDIR /app
+RUN useradd -m -r user && mkdir /app && chown user /app
+USER user
 
-RUN pip install --upgrade pip
-COPY requirements/ /app/requirements
-RUN pip install -r requirements/dev.txt
+WORKDIR /app
+RUN python -m pip install --upgrade pip==21.3.1 && pip install --user pdm==1.12.6
+ENV PATH="/app/__pypackages__/3.10/bin:/home/user/.local/bin:${PATH}"
+
+COPY pdm.lock pyproject.toml /app/
+RUN pdm install
+RUN pdm install --group dev --dev
 
 COPY . /app
 

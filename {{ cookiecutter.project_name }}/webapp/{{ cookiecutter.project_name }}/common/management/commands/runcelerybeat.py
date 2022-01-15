@@ -19,7 +19,7 @@ def restart_celery_beat():
             "beat "
             "--scheduler django_celery_beat.schedulers:DatabaseScheduler "
             "-l debug "
-            "--pidfile /var/run/celerybeat.pid"
+            "--pidfile /tmp/celerybeat.pid"
         )
     )
 

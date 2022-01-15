@@ -6,6 +6,6 @@ while ! echo 'SELECT 1' | PGPASSWORD=$POSTGRES_PASSWORD psql --host $POSTGRES_HO
 while ! nc -z redis 6379; do echo "Waiting for redis:6379"; sleep 5; done
 while ! nc -z webapp 8000; do echo "Waiting for webapp:8000"; sleep 5; done
 
-while ! celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@celery; do echo "Waiting for celery"; sleep 5; done
+while ! pdm run celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@celery; do echo "Waiting for celery"; sleep 5; done
 
-python manage.py runcelerybeat
+pdm run python manage.py runcelerybeat

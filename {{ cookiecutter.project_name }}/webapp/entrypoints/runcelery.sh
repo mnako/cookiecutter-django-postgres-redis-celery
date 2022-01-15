@@ -6,4 +6,4 @@ while ! echo 'SELECT 1' | PGPASSWORD=$POSTGRES_PASSWORD psql --host $POSTGRES_HO
 while ! nc -z redis 6379; do echo "Waiting for redis:6379"; sleep 5; done
 while ! nc -z webapp 8000; do echo "Waiting for webapp:8000"; sleep 5; done
 
-python manage.py runcelery
+pdm run python manage.py runcelery

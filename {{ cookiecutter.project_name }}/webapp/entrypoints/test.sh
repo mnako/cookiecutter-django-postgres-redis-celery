@@ -5,4 +5,4 @@ while ! echo 'SELECT 1' | PGPASSWORD=$POSTGRES_PASSWORD psql --host $POSTGRES_HO
 
 while ! nc -z redis 6379; do echo "Waiting for redis:6379"; sleep 5; done
 
-python manage.py test --settings=settings.testing
+pdm run python manage.py test --settings=settings.testing
