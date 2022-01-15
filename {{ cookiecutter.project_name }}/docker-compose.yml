@@ -25,8 +25,9 @@ services:
       timeout: 10s
       retries: 3
 
-  app:
-    build: ./app
+  webapp:
+    build: ./webapp
+    image: "{{ cookiecutter.project_name }}_webapp:dev"
     restart: always
     ports:
      - "8000:8000"
@@ -43,7 +44,7 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       REDIS_URL: $REDIS_URL
     volumes:
-     - ./app:/app
+     - ./webapp:/app
     healthcheck:
       test: curl --fail http://localhost:8000/?healthcheck || exit 1
       interval: 1m
@@ -51,7 +52,7 @@ services:
       retries: 3
 
   migrate:
-    build: ./app
+    image: "{{ cookiecutter.project_name }}_webapp:dev"
     command: sh entrypoints/migrate.sh
     restart: on-failure
     # container_name prevents scaling the migrate container beyond 1
@@ -65,12 +66,12 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       REDIS_URL: $REDIS_URL
 
-  celery:
-    build: ./app
+  celeryworker:
+    image: "{{ cookiecutter.project_name }}_webapp:dev"
     command: sh entrypoints/runcelery.sh
     restart: on-failure
     depends_on:
-     - app
+     - webapp
     environment:
       DJANGO_SETTINGS_MODULE: $DJANGO_SETTINGS_MODULE
       DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
@@ -80,7 +81,7 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       REDIS_URL: $REDIS_URL
     volumes:
-     - ./app:/app
+     - ./webapp:/app
     healthcheck:
       test: celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@celery || exit 1
       interval: 1m
@@ -88,11 +89,11 @@ services:
       retries: 3
 
   celerybeat:
-    build: ./app
+    image: "{{ cookiecutter.project_name }}_webapp:dev"
     command: sh entrypoints/runcelerybeat.sh
     restart: on-failure
     depends_on:
-     - celery
+     - celeryworker
     environment:
       DJANGO_SETTINGS_MODULE: $DJANGO_SETTINGS_MODULE
       DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
@@ -102,7 +103,7 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       REDIS_URL: $REDIS_URL
     volumes:
-     - ./app:/app
+     - ./webapp:/app
     healthcheck:
       test: ps -p $$(cat /var/run/celerybeat.pid) || exit 1
       interval: 1m

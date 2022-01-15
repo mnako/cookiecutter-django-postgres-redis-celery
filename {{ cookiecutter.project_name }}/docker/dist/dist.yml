@@ -36,11 +36,11 @@ services:
       - "80:80"
       - "443:443"
     links:
-      - app
+      - webapp
 
-  app:
-    build: ./app
-    image: "{{ cookiecutter.project_name }}_app:${PROJECT_VERSION}"
+  webapp:
+    build: ./webapp
+    image: "{{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION}"
     restart: always
     ports:
      - "8999:8999"
@@ -66,7 +66,7 @@ services:
       retries: 3
 
   migrate:
-    image: "{{ cookiecutter.project_name }}_app:${PROJECT_VERSION}"
+    image: "{{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION}"
     command: sh entrypoints/migrate.sh
     restart: on-failure
     # container_name prevents scaling the migrate container beyond 1
@@ -81,15 +81,15 @@ services:
       REDIS_URL: $REDIS_URL
 
   celery:
-    build: ./celery
-    image: "{{ cookiecutter.project_name }}_celery:${PROJECT_VERSION}"
+    image: "{{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION}"
+    command: sh entrypoints/runcelery.sh
     restart: always
     links:
      - db
      - redis
-     - app
+     - webapp
     depends_on:
-     - app
+     - webapp
     environment:
       DJANGO_SETTINGS_MODULE: $DJANGO_SETTINGS_MODULE
       POSTGRES_HOST: $POSTGRES_HOST
@@ -104,13 +104,13 @@ services:
       retries: 3
 
   celerybeat:
-    build: ./celerybeat
-    image: "{{ cookiecutter.project_name }}_celerybeat:${PROJECT_VERSION}"
+    image: "{{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION}"
+    command: sh entrypoints/runcelerybeat.sh
     restart: always
     links:
      - db
      - redis
-     - app
+     - webapp
     depends_on:
      - celery
     environment:

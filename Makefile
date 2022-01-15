@@ -1,9 +1,14 @@
 install:
-	pip3 install -U pip
-	pip3 install poetry
-	poetry install
+	pdm install
+	pdm install --group dev
 
 test:
-	poetry run pytest --capture=no --verbose
+	pdm run pytest -vv tests
 
-.PHONY: install test
+rm:
+	rm -rf .mypy_cache/ || true
+	rm -rf .pytest_cache/ || true
+	rm -rf __pypackages__/ || true
+	rm -rf tests/__pycache__/ || true
+
+.PHONY: install test rm
