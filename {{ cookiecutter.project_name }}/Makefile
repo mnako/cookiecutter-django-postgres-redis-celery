@@ -1,5 +1,5 @@
 dev-image:
-	@if [[ "$(shell docker image inspect --format='exists' {{ cookiecutter.project_name }}_webapp:dev)" != "exists" ]]; then docker-compose build webapp; fi;
+	@if [ "$(shell docker image inspect --format='exists' {{ cookiecutter.project_name }}_webapp:dev)" != "exists" ]; then docker-compose build webapp; fi;
 	@if [ ! -d "webapp/__pypackages__" ]; then docker-compose run --rm webapp pdm install; docker-compose run --rm webapp pdm install --group dev; fi;
 
 up: dev-image
