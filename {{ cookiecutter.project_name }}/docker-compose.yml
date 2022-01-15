@@ -1,7 +1,7 @@
-version: '2.1'
+version: "2.1"
 services:
   db:
-    image: "postgres:11-alpine"
+    image: "postgres:13.5-alpine3.15"
     restart: always
     environment:
       POSTGRES_HOST: $POSTGRES_HOST
@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
-     - ./pgsql/.pgdata:/var/lib/postgresql/data/
+     - ./db/.pgdata:/var/lib/postgresql/data/
     healthcheck:
       test: echo 'SELECT 1' | PGPASSWORD=$POSTGRES_PASSWORD psql --host $$HOSTNAME --user $POSTGRES_USER $POSTGRES_DB
       interval: 1m
@@ -17,7 +17,7 @@ services:
       retries: 3
 
   redis:
-    image: "redis:6.0.9-alpine"
+    image: "redis:6.2.6-alpine3.15"
     restart: always
     healthcheck:
       test: redis-cli PING || exit 1
@@ -83,7 +83,7 @@ services:
     volumes:
      - ./webapp:/app
     healthcheck:
-      test: celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@celery || exit 1
+      test: pdm run celery -A {{ cookiecutter.project_name }}.celery inspect ping -d celery@celery || exit 1
       interval: 1m
       timeout: 10s
       retries: 3

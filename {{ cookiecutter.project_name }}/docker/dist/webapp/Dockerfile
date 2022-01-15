@@ -1,6 +1,6 @@
 FROM {{ cookiecutter.project_name }}_webapp:dev as builder
 
-FROM python:3.10.0-alpine3.13
+FROM python:3.10.1-alpine3.15
 
 COPY --from=builder /app /app
 

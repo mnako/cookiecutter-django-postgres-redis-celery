@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   db:
-    image: "postgres:11-alpine"
+    image: "postgres:13.5-alpine3.15"
     restart: always
     environment:
       POSTGRES_HOST: $POSTGRES_HOST
@@ -19,7 +19,7 @@ services:
       retries: 3
 
   redis:
-    image: "redis:6.0.9-alpine"
+    image: "redis:6.2.6-alpine3.15"
     restart: always
     mem_limit: 1G
     healthcheck:
@@ -98,7 +98,7 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     mem_limit: 2G
     healthcheck:
-      test: celery -A {{ cookiecutter.project_name }} inspect ping -d celery@$$HOSTNAME || exit 1
+      test: pdm run celery -A {{ cookiecutter.project_name }} inspect ping -d celery@$$HOSTNAME || exit 1
       interval: 1m
       timeout: 10s
       retries: 3
