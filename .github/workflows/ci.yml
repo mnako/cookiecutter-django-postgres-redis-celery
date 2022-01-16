@@ -26,8 +26,5 @@ jobs:
       - name: "Install Dependencies"
         run: make install
 
-      - name: "Attach tmate session for debuggin"
-        uses: mxschmitt/action-tmate@v3
-
       - name: "Test Cookiecutter"
         run: make test

@@ -2,7 +2,7 @@ FROM python:3.10.1-slim-bullseye
 
 RUN apt-get update && apt-get install -y curl ca-certificates netcat-openbsd procps postgresql-client-13
 
-RUN useradd -m -r user && mkdir /app && chown user /app
+RUN useradd -u 1001 -m -r user && mkdir /app && chown user /app
 USER user
 
 WORKDIR /app
