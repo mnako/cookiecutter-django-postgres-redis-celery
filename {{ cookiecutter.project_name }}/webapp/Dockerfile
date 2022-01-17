@@ -5,7 +5,11 @@ ARG GROUP_ID
 
 RUN apt-get update && apt-get install -y curl ca-certificates netcat-openbsd procps postgresql-client-13
 
-RUN useradd -u ${USER_ID} -g ${GROUP_ID} -m -r user && mkdir /app && chown user /app
+RUN groupadd --force --gid ${GROUP_ID} --system usergroup && \
+    useradd --uid ${USER_ID} --gid ${GROUP_ID} --create-home --system user && \
+    mkdir /app && \
+    chown user /app
+
 USER user
 
 WORKDIR /app
