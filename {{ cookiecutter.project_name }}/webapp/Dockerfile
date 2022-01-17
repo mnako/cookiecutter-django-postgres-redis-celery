@@ -1,8 +1,11 @@
 FROM python:3.10.1-slim-bullseye
 
+ARG USER_ID
+ARG GROUP_ID
+
 RUN apt-get update && apt-get install -y curl ca-certificates netcat-openbsd procps postgresql-client-13
 
-RUN useradd -u 1001 -m -r user && mkdir /app && chown user /app
+RUN useradd -u ${USER_ID} -g ${GROUP_ID} -m -r user && mkdir /app && chown user /app
 USER user
 
 WORKDIR /app

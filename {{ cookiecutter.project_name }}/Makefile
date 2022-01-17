@@ -1,5 +1,8 @@
+USER_ID := $(shell id -u)
+GROUP_ID := $(shell id -g)
+
 dev-image:
-	@if [ "$(shell docker image inspect --format='exists' {{ cookiecutter.project_name }}_webapp:dev)" != "exists" ]; then docker-compose build webapp; fi;
+	@if [ "$(shell docker image inspect --format='exists' {{ cookiecutter.project_name }}_webapp:dev)" != "exists" ]; then docker-compose build --build-arg USER_ID=${USER_ID} --build-arg GROUP_ID=${GROUP_ID} webapp; fi;
 	@if [ ! -d "webapp/__pypackages__" ]; then docker-compose run --rm webapp pdm install; docker-compose run --rm webapp pdm install --group dev; fi;
 
 up: dev-image
@@ -24,7 +27,7 @@ build:
 	@if [ -z ${PROJECT_VERSION} ]; then echo Usage: make build PROJECT_VERSION=0.0.0 && exit 1; fi;
 
 	echo "Building dev image"
-	docker-compose build
+	docker-compose build --build-arg USER_ID=${USER_ID} --build-arg GROUP_ID=${GROUP_ID}
 
 	echo "Creating an optimised build for {{ cookiecutter.project_name }} ${PROJECT_VERSION}"
 	docker-compose -f docker/dist/dist.yml build
