@@ -149,3 +149,43 @@ def test_project_make_up_reaches_healthy_state():
     assert (
         docker_down_process_return_code == 0
     ), "make down did not exit with code 0"
+
+
+def test_project_make_down_succeeds():
+    docker_build_process = subprocess.Popen(
+        "make down",
+        shell=True,
+        cwd=test_project_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    for line in iter(docker_build_process.stdout.readline, b""):
+        logger.info(line.decode().strip())
+
+    for line in iter(docker_build_process.stderr.readline, b""):
+        logger.warning(line.decode().strip())
+
+    docker_build_process_return_code = docker_build_process.wait()
+    assert (
+            docker_build_process_return_code == 0
+    ), "make down did not exit with code 0"
+
+
+def test_project_make_rm_succeeds():
+    docker_build_process = subprocess.Popen(
+        "make rm",
+        shell=True,
+        cwd=test_project_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    for line in iter(docker_build_process.stdout.readline, b""):
+        logger.info(line.decode().strip())
+
+    for line in iter(docker_build_process.stderr.readline, b""):
+        logger.warning(line.decode().strip())
+
+    docker_build_process_return_code = docker_build_process.wait()
+    assert (
+            docker_build_process_return_code == 0
+    ), "make rm did not exit with code 0"
