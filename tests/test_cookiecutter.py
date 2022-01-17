@@ -8,8 +8,11 @@ from cookiecutter import utils
 from cookiecutter.main import cookiecutter
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    format="%(asctime)s %(message)s", encoding="utf-8", level=logging.INFO
+)
 logger = logging.getLogger("cookiecutter-django-postgres-redis-celery")
+
 
 test_project_dir = "/tmp/testproject"
 
@@ -86,63 +89,63 @@ def test_project_make_test_succeeds():
     ), "make test did not exit with code 0"
 
 
-# @pytest.mark.timeout(60 * 5)
-# def test_project_make_up_reaches_healthy_state():
-#     logger.info("bringing testproject up")
-#     docker_run_process = subprocess.Popen(
-#         "make up",
-#         shell=True,
-#         cwd=test_project_dir,
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.PIPE,
-#     )
-#
-#     all_services_healthy = False
-#     while not all_services_healthy:
-#         time.sleep(15)
-#         logger.info("waiting for all services to reach healthy state")
-#
-#         docker_ps_process = subprocess.Popen(
-#             "docker ps",
-#             shell=True,
-#             cwd=test_project_dir,
-#             stdout=subprocess.PIPE,
-#             stderr=subprocess.PIPE,
-#         )
-#         stdout, stderr = docker_ps_process.communicate()
-#         stdout = stdout.decode()
-#         stderr = stderr.decode()
-#
-#         logger.info(stdout)
-#         if stderr:
-#             logger.warning(stderr)
-#
-#         assert (
-#             "unhealthy" not in stdout
-#         ), "at least one service reached unhealthy state"
-#
-#         if "health: starting" not in stdout:
-#             all_services_healthy = True
-#             logger.info("all services reached healthy state")
-#
-#     logger.info("terminating docker run process")
-#     docker_run_process.terminate()
-#
-#     logger.info("bringing testproject down")
-#     docker_down_process = subprocess.Popen(
-#         "make down",
-#         shell=True,
-#         cwd=test_project_dir,
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.PIPE,
-#     )
-#     for line in iter(docker_run_process.stdout.readline, b""):
-#         logger.info(line.decode().strip())
-#
-#     for line in iter(docker_run_process.stderr.readline, b""):
-#         logger.warning(line.decode().strip())
-#
-#     docker_down_process_return_code = docker_down_process.wait()
-#     assert (
-#         docker_down_process_return_code == 0
-#     ), "make down did not exit with code 0"
+@pytest.mark.timeout(60 * 3)
+def test_project_make_up_reaches_healthy_state():
+    logger.info("bringing testproject up")
+    docker_run_process = subprocess.Popen(
+        "make up",
+        shell=True,
+        cwd=test_project_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+
+    all_services_healthy = False
+    while not all_services_healthy:
+        time.sleep(15)
+        logger.info("waiting for all services to reach healthy state")
+
+        docker_ps_process = subprocess.Popen(
+            "docker ps",
+            shell=True,
+            cwd=test_project_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        stdout, stderr = docker_ps_process.communicate()
+        stdout = stdout.decode()
+        stderr = stderr.decode()
+
+        logger.info(stdout)
+        if stderr:
+            logger.warning(stderr)
+
+        assert (
+            "unhealthy" not in stdout
+        ), "at least one service reached unhealthy state"
+
+        if "health: starting" not in stdout:
+            all_services_healthy = True
+            logger.info("all services reached healthy state")
+
+    logger.info("terminating docker run process")
+    docker_run_process.terminate()
+
+    logger.info("bringing testproject down")
+    docker_down_process = subprocess.Popen(
+        "make down",
+        shell=True,
+        cwd=test_project_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    for line in iter(docker_run_process.stdout.readline, b""):
+        logger.info(line.decode().strip())
+
+    for line in iter(docker_run_process.stderr.readline, b""):
+        logger.warning(line.decode().strip())
+
+    docker_down_process_return_code = docker_down_process.wait()
+    assert (
+        docker_down_process_return_code == 0
+    ), "make down did not exit with code 0"

@@ -3,7 +3,7 @@ install:
 	pdm install --group dev
 
 test:
-	pdm run pytest -vv tests
+	pdm run pytest --verbose tests
 
 rm:
 	rm -rf .mypy_cache/ || true
