@@ -117,7 +117,7 @@ extras = ["toml"]
 requires_python = ">=3.6"
 summary = "Code coverage measurement for Python"
 dependencies = [
-    "coverage>=5.2.1",
+    "coverage==6.2",
     "tomli",
 ]
 
@@ -131,7 +131,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "Django"
+name = "django"
 version = "3.2.10"
 requires_python = ">=3.6"
 summary = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
@@ -305,12 +305,12 @@ summary = "World timezone definitions, modern and historical"
 
 [[package]]
 name = "redis"
-version = "4.1.0"
+version = "4.1.1"
 requires_python = ">=3.6"
 summary = "Python client for Redis database and key-value store"
 dependencies = [
     "deprecated>=1.2.3",
-    "packaging>=21.3",
+    "packaging>=20.4",
 ]
 
 [[package]]
@@ -368,7 +368,7 @@ summary = "Module for decorators, wrappers and monkey patching."
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:2e4db5a4ce970db7f4f6fe78b28af83b2eed9b7aed40aac9986f36e41cd5c3b1"
+content_hash = "sha256:bbe2fc6234280dfdbaae0dc4a8661082419057524fb16a1a93d28deada2e82b9"
 
 [metadata.files]
 "amqp 5.0.9" = [
@@ -627,9 +627,9 @@ content_hash = "sha256:2e4db5a4ce970db7f4f6fe78b28af83b2eed9b7aed40aac9986f36e41
     {file = "pytz-2021.3-py2.py3-none-any.whl", hash = "sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c"},
     {file = "pytz-2021.3.tar.gz", hash = "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"},
 ]
-"redis 4.1.0" = [
-    {file = "redis-4.1.0-py3-none-any.whl", hash = "sha256:e13fad67c098a33141bacde872786960e86a5c97a4255009bcd43c795fa1cc77"},
-    {file = "redis-4.1.0.tar.gz", hash = "sha256:21f0a23bce707909076e6ba2ce076cba59bff60d2ab22972e0647fdf620ffe47"},
+"redis 4.1.1" = [
+    {file = "redis-4.1.1-py3-none-any.whl", hash = "sha256:bc97d18938ca18d66737d0ef88584a2073069589e4026813cfba9ad6df9a9f40"},
+    {file = "redis-4.1.1.tar.gz", hash = "sha256:07420a3fbedd8e012c31d4fadac943fb81568946da202c5a5bc237774e5280a0"},
 ]
 "setuptools 59.6.0" = [
     {file = "setuptools-59.6.0-py3-none-any.whl", hash = "sha256:4ce92f1e1f8f01233ee9952c04f6b81d1e02939d6e1b488428154974a4d0783e"},

@@ -9,7 +9,7 @@ dependencies = [
     "Django==3.2.10",
     "django-celery-beat==2.2.1",
     "psycopg2-binary==2.9.3",
-    "redis==4.1.0",
+    "redis==4.1.1",
     "kombu==5.2.3",
     "celery==5.2.3",
     "gunicorn==20.1.0",
