@@ -1,7 +1,7 @@
 dev-env:
 	@if [ ! -d "__pypackages__" ]; then pdm install; pdm install --group dev; fi;
 
-test:
+test: dev-env
 	pdm run pytest --verbose tests
 
 rm:
@@ -10,4 +10,4 @@ rm:
 	rm -rf __pypackages__/ || true
 	rm -rf tests/__pycache__/ || true
 
-.PHONY: install test rm
+.PHONY: dev-env test rm
