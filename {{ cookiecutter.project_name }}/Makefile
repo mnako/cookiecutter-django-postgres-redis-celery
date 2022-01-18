@@ -1,21 +1,21 @@
 USER_ID := $(shell id -u)
 GROUP_ID := $(shell id -g)
 
-dev-image:
+dev-env:
 	@if [ "$(shell docker image inspect --format='exists' {{ cookiecutter.project_name }}_webapp:dev)" != "exists" ]; then docker-compose build --build-arg USER_ID=${USER_ID} --build-arg GROUP_ID=${GROUP_ID} webapp; fi;
 	@if [ ! -d "webapp/__pypackages__" ]; then docker-compose run --rm webapp pdm install; docker-compose run --rm webapp pdm install --group dev; fi;
 
-up: dev-image
+up: dev-env
 	docker-compose up
 
-bash: dev-image
+bash: dev-env
 	docker-compose run --rm webapp bash
 	docker-compose down
 
 down:
 	docker-compose down
 
-test: dev-image
+test: dev-env
 	docker-compose run --rm webapp sh entrypoints/test.sh
 	docker-compose down
 
