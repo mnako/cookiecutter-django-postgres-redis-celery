@@ -10,7 +10,7 @@ RUN apk update && \
     apk add --no-cache ca-certificates postgresql-libs curl netcat-openbsd jpeg-dev postgresql-client && \
     apk add --virtual .build-deps gcc musl-dev postgresql-dev git make libffi-dev zlib-dev
 
-ADD ./entrypoints /app/entrypoints
+ADD ./entrypoints/production /app/entrypoints
 
 RUN rm -rf /root/.cache && \
     apk --purge del .build-deps && \

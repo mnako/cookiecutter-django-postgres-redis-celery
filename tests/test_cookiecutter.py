@@ -51,7 +51,7 @@ def test_project_renders_to_dir():
 
 def test_project_make_build_succeeds():
     docker_build_process = subprocess.Popen(
-        "make build PROJECT_VERSION=0.0.0",
+        "make build VERSION=0.0.0",
         shell=True,
         cwd=test_project_dir,
         stdout=subprocess.PIPE,

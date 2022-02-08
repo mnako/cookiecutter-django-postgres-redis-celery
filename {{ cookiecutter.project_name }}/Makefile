@@ -24,25 +24,20 @@ rm:
 	rm -rf webapp/__pypackages__/ || true
 
 build:
-	@if [ -z ${PROJECT_VERSION} ]; then echo Usage: make build PROJECT_VERSION=0.0.0 && exit 1; fi;
+	@if [ -z ${VERSION} ]; then echo Usage: make build VERSION=0.0.0 && exit 1; fi;
 
 	echo "Building dev image"
 	docker-compose build --build-arg USER_ID=${USER_ID} --build-arg GROUP_ID=${GROUP_ID}
 
-	echo "Creating an optimised build for {{ cookiecutter.project_name }} ${PROJECT_VERSION}"
-	docker-compose -f docker/dist/dist.yml build
+	echo "Creating an optimised build for {{ cookiecutter.project_name }} ${VERSION}"
+	docker build --file webapp/production.Dockerfile --tag {{ cookiecutter.project_name }}_webapp:${VERSION} webapp
 
 push:
-	@if [ -z ${PROJECT_VERSION} ]; then echo Usage: make push PROJECT_VERSION=0.0.0 && exit 1; fi;
+	@if [ -z ${VERSION} ]; then echo Usage: make push VERSION=0.0.0 && exit 1; fi;
 
-	echo "Tagging and pushing {{ cookiecutter.project_name }} nginx ${PROJECT_VERSION}"
-	docker tag {{ cookiecutter.project_name }}_nginx:${PROJECT_VERSION} {{ cookiecutter.docker_image_registry }}/{{ cookiecutter.project_name }}_nginx:${PROJECT_VERSION}
-	docker push {{ cookiecutter.docker_image_registry }}/{{ cookiecutter.project_name }}_nginx
-	docker rmi {{ cookiecutter.project_name }}_nginx:${PROJECT_VERSION}
-
-	echo "Tagging and pushing {{ cookiecutter.project_name }} webapp ${PROJECT_VERSION}"
-	docker tag {{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION} {{ cookiecutter.docker_image_registry }}/{{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION}
+	echo "Tagging and pushing {{ cookiecutter.project_name }} webapp ${VERSION}"
+	docker tag {{ cookiecutter.project_name }}_webapp:${VERSION} {{ cookiecutter.docker_image_registry }}/{{ cookiecutter.project_name }}_webapp:${VERSION}
 	docker push {{ cookiecutter.docker_image_registry }}/{{ cookiecutter.project_name }}_webapp
-	docker rmi {{ cookiecutter.project_name }}_webapp:${PROJECT_VERSION}
+	docker rmi {{ cookiecutter.project_name }}_webapp:${VERSION}
 
 .PHONY: dev-image up down test rm build push

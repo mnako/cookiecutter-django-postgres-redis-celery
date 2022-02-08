@@ -17,9 +17,6 @@ This will give you a Docker-Compose project that includes:
 * Celery worker;
 * Celery Beat.
 
-Dist images will also include nginx with SSL config and certs managed by 
-letsencrypt (WIP).
-
 To start your new project do:
 
     cd <project_dir>
@@ -38,8 +35,8 @@ To test your app do:
     
 To create an optimised production build do:
 
-    make build PROJECT_VERSION=0.0.0
+    make build VERSION=0.0.0
     
 To push the optimised images to the registry do:
 
-    make push PROJECT_VERSION=0.0.0
+    make push VERSION=0.0.0

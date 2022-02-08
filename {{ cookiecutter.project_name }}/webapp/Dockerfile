@@ -23,4 +23,4 @@ RUN pdm install --group dev --dev
 COPY . /app
 
 EXPOSE 8000
-CMD ["sh", "entrypoints/runserver.sh"]
+CMD ["sh", "entrypoints/dev/runserver.sh"]
