@@ -18,8 +18,8 @@ To test the project run:
     
 To create an optimised production build do:
 
-    make build PROJECT_VERSION=0.0.0
+    make build VERSION=0.0.0
     
 To push the optimised images to the registry do:
 
-    make push PROJECT_VERSION=0.0.0
+    make push VERSION=0.0.0

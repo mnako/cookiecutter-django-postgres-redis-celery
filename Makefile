@@ -1,9 +1,13 @@
-install:
-	pip3 install -U pip
-	pip3 install poetry
-	poetry install
+dev-env:
+	@if [ ! -d "__pypackages__" ]; then pdm install; pdm install --group dev; fi;
 
-test:
-	poetry run pytest --capture=no --verbose
+test: dev-env
+	pdm run pytest --verbose tests
 
-.PHONY: install test
+rm:
+	rm -rf .mypy_cache/ || true
+	rm -rf .pytest_cache/ || true
+	rm -rf __pypackages__/ || true
+	rm -rf tests/__pycache__/ || true
+
+.PHONY: dev-env test rm

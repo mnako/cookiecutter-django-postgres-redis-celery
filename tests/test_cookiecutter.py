@@ -8,8 +8,11 @@ from cookiecutter import utils
 from cookiecutter.main import cookiecutter
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    format="%(asctime)s %(message)s", encoding="utf-8", level=logging.INFO
+)
 logger = logging.getLogger("cookiecutter-django-postgres-redis-celery")
+
 
 test_project_dir = "/tmp/testproject"
 
@@ -48,7 +51,7 @@ def test_project_renders_to_dir():
 
 def test_project_make_build_succeeds():
     docker_build_process = subprocess.Popen(
-        "make build PROJECT_VERSION=0.0.0",
+        "make build VERSION=0.0.0",
         shell=True,
         cwd=test_project_dir,
         stdout=subprocess.PIPE,
@@ -86,7 +89,7 @@ def test_project_make_test_succeeds():
     ), "make test did not exit with code 0"
 
 
-@pytest.mark.timeout(60 * 5)
+@pytest.mark.timeout(60 * 3)
 def test_project_make_up_reaches_healthy_state():
     logger.info("bringing testproject up")
     docker_run_process = subprocess.Popen(
@@ -146,3 +149,43 @@ def test_project_make_up_reaches_healthy_state():
     assert (
         docker_down_process_return_code == 0
     ), "make down did not exit with code 0"
+
+
+def test_project_make_down_succeeds():
+    docker_build_process = subprocess.Popen(
+        "make down",
+        shell=True,
+        cwd=test_project_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    for line in iter(docker_build_process.stdout.readline, b""):
+        logger.info(line.decode().strip())
+
+    for line in iter(docker_build_process.stderr.readline, b""):
+        logger.warning(line.decode().strip())
+
+    docker_build_process_return_code = docker_build_process.wait()
+    assert (
+            docker_build_process_return_code == 0
+    ), "make down did not exit with code 0"
+
+
+def test_project_make_rm_succeeds():
+    docker_build_process = subprocess.Popen(
+        "make rm",
+        shell=True,
+        cwd=test_project_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    for line in iter(docker_build_process.stdout.readline, b""):
+        logger.info(line.decode().strip())
+
+    for line in iter(docker_build_process.stderr.readline, b""):
+        logger.warning(line.decode().strip())
+
+    docker_build_process_return_code = docker_build_process.wait()
+    assert (
+            docker_build_process_return_code == 0
+    ), "make rm did not exit with code 0"
