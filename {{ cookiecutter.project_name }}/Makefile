@@ -16,7 +16,7 @@ down:
 	docker-compose down
 
 test: dev-env
-	docker-compose run --rm webapp sh entrypoints/test.sh
+	docker-compose run --rm webapp sh entrypoints/dev/test.sh
 	docker-compose down
 
 rm:
