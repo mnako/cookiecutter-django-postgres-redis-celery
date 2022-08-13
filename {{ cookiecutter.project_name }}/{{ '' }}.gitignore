@@ -4,3 +4,4 @@
 .pytest_cache/
 __pypackages__/
 **/__pycache__/
+db/.pgdata

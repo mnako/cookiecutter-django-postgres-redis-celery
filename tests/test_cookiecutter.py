@@ -102,7 +102,7 @@ def test_project_make_up_reaches_healthy_state():
 
     all_services_healthy = False
     while not all_services_healthy:
-        time.sleep(15)
+        time.sleep(16)
         logger.info("waiting for all services to reach healthy state")
 
         docker_ps_process = subprocess.Popen(
