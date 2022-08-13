@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   db:
-    image: "postgres:13.5-alpine3.15"
+    image: "postgres:13.6-alpine3.15"
     restart: "on-failure"
     environment:
       POSTGRES_HOST: "${POSTGRES_HOST}"
@@ -69,6 +69,8 @@ services:
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       REDIS_URL: "${REDIS_URL}"
+    volumes:
+      - ./webapp:/app
 
   celeryworker:
     image: "{{ cookiecutter.project_name }}_webapp:dev"
