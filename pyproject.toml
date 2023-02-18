@@ -1,6 +1,6 @@
 [project]
 name = "cookiecutter-django-postgres-redis-celery"
-version = "0.1.0"
+version = "1.0.2"
 description = "Django/PostgreSQL/Redis/Celery in Docker cookiecutter"
 authors = [
     {name = "Michal Nakoneczny", email = "michal@nakoneczny.pl"},
