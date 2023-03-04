@@ -10,10 +10,8 @@ RUN apk update && \
     apk add --no-cache ca-certificates postgresql-libs curl netcat-openbsd jpeg-dev postgresql-client && \
     apk add --virtual .build-deps gcc musl-dev postgresql-dev git make libffi-dev zlib-dev
 
-ADD ./entrypoints/production /app/entrypoints
-
 RUN rm -rf /root/.cache && \
     apk --purge del .build-deps && \
     rm -rf node_modules
 
-CMD ["sh", "entrypoints/runserver.sh"]
+CMD ["pdm", "run", "gunicorn", "--workers", "4", "--bind", "0.0.0.0:8000", "{{ cookiecutter.project_name }}.wsgi:application"]
