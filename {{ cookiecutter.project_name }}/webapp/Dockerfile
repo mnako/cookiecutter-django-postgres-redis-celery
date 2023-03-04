@@ -30,4 +30,4 @@ USER user
 COPY . /app
 
 EXPOSE 8000
-CMD ["sh", "entrypoints/dev/runserver.sh"]
+CMD ["pdm", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
