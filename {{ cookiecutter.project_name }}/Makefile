@@ -3,7 +3,7 @@ GROUP_ID := $(shell id -g)
 
 dev-env:
 	@if [ "$(shell docker image inspect --format='exists' {{ cookiecutter.project_name }}_webapp:dev)" != "exists" ]; then docker-compose build --build-arg USER_ID=${USER_ID} --build-arg GROUP_ID=${GROUP_ID} webapp; fi;
-	@if [ ! -d "webapp/__pypackages__" ]; then docker-compose run --rm webapp pdm install; docker-compose run --rm webapp pdm install --group dev; fi;
+	@if [ ! -d "webapp/__pypackages__" ]; then docker run --rm -v $(PWD)/webapp:/app {{ cookiecutter.project_name }}_webapp:dev bash -c 'pdm install && pdm install --group dev'; fi;
 
 up: dev-env
 	docker-compose up
@@ -16,7 +16,7 @@ down:
 	docker-compose down
 
 test: dev-env
-	docker-compose run --rm webapp sh entrypoints/dev/test.sh
+	docker-compose run --rm webapp pdm run python manage.py test --settings=settings.testing
 	docker-compose down
 
 rm:
@@ -40,4 +40,4 @@ push:
 	docker push {{ cookiecutter.docker_image_registry }}/{{ cookiecutter.project_name }}_webapp
 	docker rmi {{ cookiecutter.project_name }}_webapp:${VERSION}
 
-.PHONY: dev-image up down test rm build push
+.PHONY: dev-image up bash down test rm build push
