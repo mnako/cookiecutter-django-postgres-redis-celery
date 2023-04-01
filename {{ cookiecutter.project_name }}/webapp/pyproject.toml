@@ -12,7 +12,7 @@ dependencies = [
     "gunicorn==20.1.0",
     "kombu==5.2.4",
     "psycopg2==2.9.5",
-    "redis==4.5.1",
+    "redis==4.5.4",
 ]
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -22,7 +22,7 @@ homepage = ""
 
 [project.optional-dependencies]
 dev = [
-    "black==23.1.0",
+    "black==23.3.0",
     "mypy==1.1.1",
     "pytest-cov==4.0.0",
     "pytest==7.2.2",
