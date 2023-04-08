@@ -17,7 +17,7 @@ services:
       retries: 4
 
   redis:
-    image: "redis:7.0.8-alpine3.17"
+    image: "redis:7.0.10-alpine3.17"
     command: >
       --requirepass ${REDIS_PASSWORD}
     restart: "on-failure"
