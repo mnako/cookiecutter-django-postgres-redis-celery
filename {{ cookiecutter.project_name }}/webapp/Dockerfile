@@ -1,10 +1,10 @@
-FROM python:3.11.4-slim-bullseye
+FROM python:3.11.4-slim-bookworm
 
 ARG USER_ID
 ARG GROUP_ID
 
 RUN apt-get update && \
-    apt-get install -y gcc curl ca-certificates netcat-openbsd procps postgresql-client-13 python3-dev libpq-dev
+    apt-get install -y gcc curl ca-certificates netcat-openbsd procps postgresql-client-15 python3-dev libpq-dev
 
 RUN groupadd --force --gid ${GROUP_ID} --system usergroup && \
     useradd --uid ${USER_ID} --gid ${GROUP_ID} --create-home --system user && \
@@ -14,8 +14,8 @@ RUN groupadd --force --gid ${GROUP_ID} --system usergroup && \
 USER user
 
 WORKDIR /app
-RUN python -m pip install --upgrade pip==23.1.2 && \
-    pip install --user pdm==2.7.4
+RUN python -m pip install --upgrade pip==23.2.1 && \
+    pip install --user pdm==2.8.1
 ENV PATH="/app/__pypackages__/3.11/bin:/home/user/.local/bin:${PATH}"
 
 COPY pdm.lock pyproject.toml /app/
