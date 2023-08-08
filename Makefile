@@ -8,7 +8,7 @@ test:
 	until ! (docker-compose ps | grep -q "starting"); do sleep 5; done && \
 	! (docker-compose ps | grep -q "unhealthy") && \
 	docker compose ps && \
-	@echo "All services healthy" && \
+	echo "All services healthy" && \
 	docker-compose down
 	@echo "All tests passed"
 
