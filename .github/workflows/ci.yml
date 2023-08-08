@@ -24,5 +24,13 @@ jobs:
       - name: "Set up PDM"
         run: pip install --user pdm==2.6.1
 
+      - name: "Debug Action"
+        run: |
+          pdm install
+          cookiecutter . --output-dir /tmp --no-input project_name=testproject
+          cd /tmp/testproject
+          make build VERSION=0.0.0
+          docker images
+
       - name: "Test Cookiecutter"
         run: make test
