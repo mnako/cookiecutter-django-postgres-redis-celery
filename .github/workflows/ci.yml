@@ -27,7 +27,7 @@ jobs:
       - name: "Debug Action"
         run: |
           pdm install
-          cookiecutter . --output-dir /tmp --no-input project_name=testproject
+          pdm run cookiecutter . --output-dir /tmp --no-input project_name=testproject
           cd /tmp/testproject
           make build VERSION=0.0.0
           docker images
