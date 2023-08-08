@@ -1,13 +1,14 @@
-dev-env:
-	@if [ ! -d "__pypackages__" ]; then pdm install; pdm install --group dev; fi;
+test:
+	rm -rf /tmp/testproject || true
+	pdm run cookiecutter . --output-dir /tmp --no-input project_name=testproject
+	cd /tmp/testproject && \
+	$(MAKE) build VERSION=0.0.0 && \
+	$(MAKE) test && \
+	docker-compose up -d && \
+	until ! (docker-compose ps | grep -q "starting"); do sleep 5; done && \
+	! (docker-compose ps | grep -q "unhealthy") && \
+	docker-compose down
+	rm -rf /tmp/testproject
+	@echo "All tests passed"
 
-test: dev-env
-	pdm run pytest --verbose tests
-
-rm:
-	rm -rf .mypy_cache/ || true
-	rm -rf .pytest_cache/ || true
-	rm -rf __pypackages__/ || true
-	rm -rf tests/__pycache__/ || true
-
-.PHONY: dev-env test rm
+.PHONY: test
