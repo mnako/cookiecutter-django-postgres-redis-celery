@@ -31,6 +31,7 @@ jobs:
           cd /tmp/testproject
           make build VERSION=0.0.0
           docker images
+          rm -rf /tmp/testproject
 
       - name: "Test Cookiecutter"
         run: make test
