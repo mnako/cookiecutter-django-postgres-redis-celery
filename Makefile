@@ -7,8 +7,9 @@ test:
 	docker-compose up -d && \
 	until ! (docker-compose ps | grep -q "starting"); do sleep 5; done && \
 	! (docker-compose ps | grep -q "unhealthy") && \
+	docker compose ps && \
+	@echo "All services healthy" && \
 	docker-compose down
-	rm -rf /tmp/testproject
 	@echo "All tests passed"
 
 .PHONY: test
