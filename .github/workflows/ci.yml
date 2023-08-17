@@ -23,7 +23,8 @@ jobs:
 
       - name: "Set up PDM"
         run: |
-          pip install --user pdm==2.6.1
+          pip install --upgrade pip==23.2.1
+          pip install --user pdm==2.8.2
           pdm install
 
       - name: "Test Cookiecutter"
