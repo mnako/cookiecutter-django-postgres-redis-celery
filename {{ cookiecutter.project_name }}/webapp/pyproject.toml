@@ -7,10 +7,10 @@ authors = [
 ]
 dependencies = [
     "django==4.2.4",
-    "celery==5.3.1",
+    "celery==5.3.3",
     "django-celery-beat==2.5.0",
     "gunicorn==21.2.0",
-    "kombu==5.3.1",
+    "kombu==5.3.2",
     "psycopg2==2.9.6",
     "redis==5.0.0",
 ]
