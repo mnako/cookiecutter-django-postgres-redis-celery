@@ -6,13 +6,13 @@ authors = [
     {name = "Michal Nakoneczny", email = "michal@nakoneczny.pl"},
 ]
 dependencies = [
-    "django==4.2.4",
-    "celery==5.3.3",
+    "django==4.2.5",
+    "celery==5.3.4",
     "django-celery-beat==2.5.0",
     "gunicorn==21.2.0",
     "kombu==5.3.2",
-    "psycopg2==2.9.6",
-    "redis==5.0.0",
+    "psycopg2==2.9.8",
+    "redis==5.0.1",
 ]
 requires-python = ">=3.11"
 license = {text = "MIT"}
@@ -22,10 +22,10 @@ homepage = ""
 
 [project.optional-dependencies]
 dev = [
-    "black==23.7.0",
+    "black==23.9.1",
     "mypy==1.5.1",
     "pytest-cov==4.1.0",
-    "pytest==7.4.0",
+    "pytest==7.4.2",
 ]
 [build-system]
 requires = ["pdm-pep517"]
