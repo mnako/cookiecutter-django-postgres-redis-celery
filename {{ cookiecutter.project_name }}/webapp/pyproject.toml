@@ -6,7 +6,7 @@ authors = [
     {name = "Michal Nakoneczny", email = "michal@nakoneczny.pl"},
 ]
 dependencies = [
-    "django==4.2.6",
+    "django==4.2.7",
     "celery==5.3.4",
     "django-celery-beat==2.5.0",
     "gunicorn==21.2.0",
@@ -22,10 +22,10 @@ homepage = ""
 
 [project.optional-dependencies]
 dev = [
-    "black==23.10.0",
+    "black==23.10.1",
     "mypy==1.6.1",
     "pytest-cov==4.1.0",
-    "pytest==7.4.2",
+    "pytest==7.4.3",
 ]
 [build-system]
 requires = ["pdm-pep517"]
