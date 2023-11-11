@@ -15,7 +15,7 @@ USER user
 
 WORKDIR /app
 RUN python -m pip install --upgrade pip==23.3.1 && \
-    pip install --user pdm==2.10.0
+    pip install --user pdm==2.10.1
 ENV PATH="/app/__pypackages__/3.11/bin:/home/user/.local/bin:${PATH}"
 
 COPY pdm.lock pyproject.toml /app/
