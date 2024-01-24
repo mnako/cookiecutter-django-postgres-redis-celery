@@ -4,8 +4,8 @@
 [metadata]
 groups = ["default", "dev"]
 strategy = ["cross_platform"]
-lock_version = "4.4"
-content_hash = "sha256:c2b0b2817e2a421c2c5f7956018c383f56dfbc9d22763371e2c123ff44dfc062"
+lock_version = "4.4.1"
+content_hash = "sha256:ff40560b2a8ca6d9e6a11486005655ab57d2150a4d122c7c921c1c6027eabb6a"
 
 [[package]]
 name = "amqp"
@@ -300,7 +300,7 @@ files = [
 
 [[package]]
 name = "kombu"
-version = "5.3.4"
+version = "5.3.5"
 requires_python = ">=3.8"
 summary = "Messaging library for Python."
 dependencies = [
@@ -308,8 +308,8 @@ dependencies = [
     "vine",
 ]
 files = [
-    {file = "kombu-5.3.4-py3-none-any.whl", hash = "sha256:63bb093fc9bb80cfb3a0972336a5cec1fa7ac5f9ef7e8237c6bf8dda9469313e"},
-    {file = "kombu-5.3.4.tar.gz", hash = "sha256:0bb2e278644d11dea6272c17974a3dbb9688a949f3bb60aeb5b791329c44fadc"},
+    {file = "kombu-5.3.5-py3-none-any.whl", hash = "sha256:0eac1bbb464afe6fb0924b21bf79460416d25d8abc52546d4f16cad94f789488"},
+    {file = "kombu-5.3.5.tar.gz", hash = "sha256:30e470f1a6b49c70dc6f6d13c3e4cc4e178aa6c469ceb6bcd55645385fc84b93"},
 ]
 
 [[package]]
