@@ -6,7 +6,7 @@ authors = [
     {name = "Michal Nakoneczny", email = "michal@nakoneczny.pl"},
 ]
 dependencies = [
-    "django==5.0.6",
+    "django==5.0.7",
     "celery==5.4.0",
     "django-celery-beat==2.6.0",
     "gunicorn==22.0.0",
